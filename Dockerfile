@@ -1,8 +1,17 @@
 FROM openjdk:11-jre-slim
 
+ 
+
+# Set the working directory inside the container
+WORKDIR /app
+
+ 
+
+# Copy the built JAR file from your Gradle project to the container
+COPY build/libs/*.jar app.jar
+
+ 
+
+# Expose the port your application will run on
 EXPOSE 8080
-WORKDIR /usr/app
-COPY ./build/libs/my-app-1.0-SNAPSHOT.jar /usr/app/
-
-
-ENTRYPOINT ["java", "-jar", "my-app-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
